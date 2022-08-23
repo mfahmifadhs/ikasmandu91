@@ -11,7 +11,7 @@ use App\Models\Submenu2Model;
 use App\Models\Submenu3Model;
 use App\Models\Submenu4Model;
 use App\Models\Submenu5Model;
-use App\Models\Submenu6Model;   
+use App\Models\Submenu6Model;
 use App\Models\CategoryModel;
 use App\Models\RulesModel;
 use App\Models\User;
@@ -36,7 +36,7 @@ class MainController extends Controller
         // ================================================
 
         $news       = DB::table('tbl_sub_menu_3')->limit(6)->get();
-        $opening    = DB::table('tbl_sub_menu_4')->get(); 
+        $opening    = DB::table('tbl_sub_menu_4')->get();
         $response   = DB::table('tbl_response')
                         ->join('tbl_alumni','tbl_alumni.id_alumni','tbl_response.alumni_id')
                         ->orderby('id_response','DESC')->limit(6)->get();
@@ -61,7 +61,7 @@ class MainController extends Controller
         // ================================================
 
         if ($aksi == 'profil') {
-            
+
             $user = DB::table('users')
                         ->join('tbl_alumni','tbl_alumni.id_alumni','users.alumni_id')
                         ->where('alumni_id', Auth::user()->alumni_id)->first();
@@ -132,7 +132,7 @@ class MainController extends Controller
                 }else{
                     $username = $request->username;
                 }
-                
+
                 User::where('alumni_id', $id)
                 ->update([
                     'username'  => $request->username
@@ -162,8 +162,8 @@ class MainController extends Controller
             }
 
         }elseif($aksi == 'daftar') {
-            $alumni = DB::table('tbl_alumni')->orderby('alumni_name','ASC')->paginate(9);
-            return view('v_main.daftar_alumni', compact('mainmenu','submenu','alumni'));
+            $alumnis = DB::table('tbl_alumni')->orderby('alumni_name','ASC')->paginate(9);
+            return view('v_main.daftar_alumni', compact('mainmenu','submenu','alumnis'));
 
         }elseif($aksi == 'cari') {
             if ($request->id_alumni == '') {
@@ -187,21 +187,21 @@ class MainController extends Controller
                return redirect('main/alumni/tambah/baru')->with('failed','Format foto tidak sesuai, mohon periksa kembali');
             } else {
                 $alumni = new AlumniModel();
-                $alumni->alumni_name            = $request->input('alumni_name');                  
-                $alumni->alumni_gender          = $request->input('alumni_gender');                  
-                $alumni->alumni_phone_number    = $request->input('alumni_phone_number');                  
-                $alumni->alumni_email           = $request->input('alumni_email');                  
-                $alumni->alumni_graduation_year = $request->input('alumni_graduation_year');                
-                $alumni->alumni_class           = $request->input('alumni_class');       
-                $alumni->alumni_placeofbirth    = $request->input('alumni_placeofbirth');                 
-                $alumni->alumni_dateofbirth     = $request->input('alumni_dateofbirth');                
-                $alumni->alumni_size_clothes    = $request->input('alumni_size_clothes');                
-                $alumni->alumni_address         = $request->input('alumni_address');       
-                $alumni->alumni_last_edu        = $request->input('alumni_last_edu');           
-                $alumni->alumni_univ            = $request->input('alumni_univ');           
-                $alumni->alumni_major           = $request->input('alumni_major');       
-                $alumni->alumni_job             = $request->input('alumni_job');   
-                $alumni->is_approve             = 0;   
+                $alumni->alumni_name            = $request->input('alumni_name');
+                $alumni->alumni_gender          = $request->input('alumni_gender');
+                $alumni->alumni_phone_number    = $request->input('alumni_phone_number');
+                $alumni->alumni_email           = $request->input('alumni_email');
+                $alumni->alumni_graduation_year = $request->input('alumni_graduation_year');
+                $alumni->alumni_class           = $request->input('alumni_class');
+                $alumni->alumni_placeofbirth    = $request->input('alumni_placeofbirth');
+                $alumni->alumni_dateofbirth     = $request->input('alumni_dateofbirth');
+                $alumni->alumni_size_clothes    = $request->input('alumni_size_clothes');
+                $alumni->alumni_address         = $request->input('alumni_address');
+                $alumni->alumni_last_edu        = $request->input('alumni_last_edu');
+                $alumni->alumni_univ            = $request->input('alumni_univ');
+                $alumni->alumni_major           = $request->input('alumni_major');
+                $alumni->alumni_job             = $request->input('alumni_job');
+                $alumni->is_approve             = 0;
 
                 if ($request->hasfile('alumni_img')) {
                     $file = $request->file('img_alumni');
@@ -370,7 +370,7 @@ class MainController extends Controller
                             ->get();
 
             return view('v_main.menu_kepengurusan', compact('mainmenu','submenu','struktur','pengurus'));
-        
+
         }elseif($aksi == 'pengurus') {
 
         }
@@ -397,7 +397,7 @@ class MainController extends Controller
 
         }
     }
-    
+
 
     /*===============================================================
                                SELECT 2

@@ -50,7 +50,7 @@
 
     <div class="col-12 form-group">
       <div class="row">
-        @foreach($alumni as $alumni)
+        @foreach($alumnis as $alumni)
         <div class="col-md-4 form-group">
           <a type="button" data-toggle="modal" data-target="#detail-alumni{{$alumni->id_alumni}}" style="width: 100%;">
             <div class="card text-center">
@@ -64,7 +64,7 @@
                 @endif
               </div>
               <div class="card-body pb-0 text-center">
-                <h6 class="card-title">{{ $alumni->alumni_name }}</h6>
+                <h6 class="card-title text-capitalize">{{ $alumni->alumni_name }}</h6>
               </div>
             </div>
           </a>
@@ -132,6 +132,9 @@
           </div>
         </div>
         @endforeach
+        <div class="col-md-12 form-group">
+          {{ $alumnis->links("pagination::bootstrap-4") }}
+        </div>
       </div>
     </div>
 
