@@ -50,7 +50,7 @@
                 </ul>
               </div>
               <!--/ Top info end -->
-  
+
               <div class="col-lg-4 col-md-4 top-social text-center text-md-right">
                 <ul class="list-unstyled">
                     <li>
@@ -80,7 +80,7 @@
         <div class="row">
           <div class="col-lg-12">
               <nav class="navbar navbar-expand-lg navbar-light p-0">
-                
+
                 <div class="logo">
                     <a class="d-block" href="{{ url('/') }}">
                       <img loading="lazy" src="{{ asset('images/main/logo-ikasmandu.png') }}" alt="Ikatan Keluarga SMA Negeri 2 Padang">
@@ -90,7 +90,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
+
                 <div id="navbar-collapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav ml-auto align-items-center">
                       <li class="nav-item dropdown active">
@@ -102,7 +102,7 @@
                             @endforeach
                             <i class="fa fa-angle-down"></i>
                           </a>
-                          <ul class="dropdown-menu" role="menu"> 
+                          <ul class="dropdown-menu" role="menu">
                             @foreach($submenu as $sm1)
                               @if($sm1->main_menu_id == 1 && $sm1->id_sub_menu != 2)
                                 <li>
@@ -115,7 +115,7 @@
                           </ul>
                       </li>
 
-                      <!-- <li class="nav-item dropdown">
+                      <li class="nav-item dropdown">
                           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             @foreach($mainmenu as $menu2)
                               @if($menu2->id_main_menu == 2)
@@ -135,15 +135,15 @@
                               @endif
                             @endforeach
                           </ul>
-                      </li> -->
-              
+                      </li>
+
                       <li class="nav-item dropdown">
                           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             @foreach($mainmenu as $menu3)
                               @if($menu3->id_main_menu == 3)
                                 {{ $menu3->main_menu_name }}
                               @endif
-                            @endforeach 
+                            @endforeach
                             <i class="fa fa-angle-down"></i>
                           </a>
                           <ul class="dropdown-menu" role="menu">
@@ -158,7 +158,7 @@
                             @endforeach
                           </ul>
                       </li>
-              
+
                       <li class="nav-item">
                         <a class="nav-link" href="{{ url('main/menu/11') }}">
                           @foreach($mainmenu as $menu4)
@@ -225,7 +225,7 @@
       <div class="container">
         <div class="row justify-content-between">
           <div class="col-lg-4 col-md-6 footer-widget footer-about">
-            <img loading="lazy" width="100%" class="footer-logo ml-0" src="{{ asset('images/main/logo-ikasmandu.png') }}" 
+            <img loading="lazy" width="100%" class="footer-logo ml-0" src="{{ asset('images/main/logo-ikasmandu.png') }}"
             alt="Logo Ikatan Keluarga Alumni SMA 2 Padang">
             <!-- <p>Tentang Ikasmandu 91</p> -->
             <div class="footer-social">
@@ -276,7 +276,7 @@
                 </script> Ikatan Keluarga Alumni SMA Negeri 2 Padang</span>
             </div>
           </div>
-          
+
         </div><!-- Row end -->
 
         <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top position-fixed">

@@ -52,25 +52,23 @@
       <div class="row">
         @foreach($alumni as $alumni)
         <div class="col-md-4 form-group">
-          <a type="button" data-toggle="modal" data-target="#detail-alumni{{$alumni->id_alumni}}">
-            <div class="card">
-              <div class="card-body pb-0 text-center">
-                <h6 class="card-title">{{ $alumni->alumni_name }}</h6>
+          <a type="button" data-toggle="modal" data-target="#detail-alumni{{$alumni->id_alumni}}" style="width: 100%;">
+            <div class="card text-center">
+              <div class="card-header">
                 @if($alumni->alumni_img == null)
                   <img class="profile-user-img img-circle" src="https://cdn-icons-png.flaticon.com/512/599/599305.png" alt="Profil"
                   style="width: 110px;height: 110px;">
                 @else
-                  <img class="profile-user-img img-circle" src="{{ asset('images/alumni/'.$alumni->alumni_img) }}" alt="Profil" 
+                  <img class="profile-user-img img-circle" src="{{ asset('images/alumni/'.$alumni->alumni_img) }}" alt="Profil"
                   style="width: 110px;height: 110px;">
                 @endif
-                <p class="pt-2">
-                  Angkatan {{ $alumni->alumni_graduation_year }} &ensp; | &ensp;
-                  Kelas    {{ $alumni->alumni_class }}
-                </p>
+              </div>
+              <div class="card-body pb-0 text-center">
+                <h6 class="card-title">{{ $alumni->alumni_name }}</h6>
               </div>
             </div>
           </a>
-        </div>     
+        </div>
         <!-- Modal -->
         <div class="modal fade" id="detail-alumni{{$alumni->id_alumni}}" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top: 10vh;padding-bottom:10vh;">
           <div class="modal-dialog" role="document">
@@ -87,7 +85,7 @@
                   <img class="profile-user-img img-thumbnail" src="https://cdn-icons-png.flaticon.com/512/599/599305.png" alt="Profil"
                   style="width: 50px;height: 50px;">
                   @else
-                  <img class="profile-user-img img-thumbnail" src="{{ asset('images/alumni/'.$alumni->alumni_img) }}" alt="Profil" 
+                  <img class="profile-user-img img-thumbnail" src="{{ asset('images/alumni/'.$alumni->alumni_img) }}" alt="Profil"
                   style="width: 50px;height: 50px;">
                   @endif
                 </p>
@@ -148,7 +146,7 @@
     // Select-2
     $(".select2-alumni").select2({
       placeholder: "Kata kunci : Nama / Tahun Angkatan /",
-      ajax: { 
+      ajax: {
         url: "{{ url('main/select2-alumni') }}",
         type: "post",
         dataType: 'json',
