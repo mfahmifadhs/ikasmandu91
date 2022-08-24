@@ -22,7 +22,7 @@
         </div><!-- Row end -->
     </div><!-- Container end -->
   </div><!-- Banner text end -->
-</div><!-- Banner area end --> 
+</div><!-- Banner area end -->
 
 <section id="gallery-area" class="gallery-area solid-bg">
   <div class="container">
@@ -35,32 +35,32 @@
 
     <div class="row">
       @foreach($galeri as $gallery)
-      <div class="col-lg-6 shuffle-item">
-        <div class="card">
-          <div class="form-group">
-            <div class="gallery-img-container">
-              <a class="gallery-popup" href="{{ asset('images/main/gallery/'. $gallery->gallery_img) }}" aria-label="gallery-img">
-                <img src="{{ asset('images/main/gallery/'. $gallery->gallery_img) }}" alt="{{ $gallery->gallery_title }}" height="350" width="100%">
-                <span class="gallery-icon"><i class="fas fa-eye"></i></span>
-              </a>
-              <div class="gallery-item-info">
-                <div class="gallery-item-info-content">
-                  <h3 class="gallery-item-title">
-                    <a href="gallerys-single.html">{{ $gallery->gallery_title }}</a>
-                  </h3>
-                  <p class="gallery-cat">{{ $gallery->gallery_text }}</p>
-                </div>
+      <div class="col-lg-6 mt-5 mt-lg-0 form-group">
+          <div class="card">
+            <div class="form-group">
+              <div class="gallery-img-container">
+                  <div id="page-slider" class="page-slider small-bg">
+                    @foreach($gallery->gallerydetail as $detail)
+                    <div class="item" style="background-image: url('{{ asset('images/main/gallery/'. $detail->image)}}')">
+                      <div class="container">
+                        <div class="box-slider-content">
+                          <div class="box-slider-text">
+                            <h2 class="box-slide-title">{{ $gallery->gallery_title }}</h2>
+                          </div>
+                        </div>
+                      </div>
+                    </div><!-- Item 1 end -->
+                    @endforeach
+                  </div><!-- Page slider end-->
               </div>
             </div>
-          </div><!-- shuffle item 5 end -->
-          <p class="pt-0 text-capitalize">
-            <i class="far fa-calendar ml-2"></i> 
-              {{ \Carbon\Carbon::parse($gallery->gallery_date)->isoFormat('DD MMMM Y') }}  &ensp; | &ensp;
-            <i class="far fa-folder-open"></i> {{ $gallery->category_name }}               &ensp; | &ensp;
-            <i class="far fa-user"></i> {{ $gallery->alumni_name }}
-          </p>
+            <p class="pt-0 text-capitalize">
+              <i class="far fa-calendar ml-2"></i>
+                {{ \Carbon\Carbon::parse($gallery->gallery_date)->isoFormat('DD MMMM Y') }}  &ensp; | &ensp;
+              <i class="far fa-folder-open"></i> {{ $gallery->category_name }}
+            </p>
+          </div>
         </div>
-      </div>
       @endforeach
     </div>
   </div>

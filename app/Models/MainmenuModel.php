@@ -19,6 +19,6 @@ class SubmenuModel extends Model {
     protected $fillable = ['main_menu_id', 'sub_menu_name', ];
 
     public function category() {
-        return $this->belongsTo(Mainmenu::class, 'main_menu_id'); 
-    } 
+        return $this->belongsTo(Mainmenu::class, 'main_menu_id');
+    }
 }

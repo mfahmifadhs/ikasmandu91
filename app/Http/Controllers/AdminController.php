@@ -4,17 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MainmenuModel;
-use App\Models\SubmenuModel;
 use App\Models\Submenu1Model;
 use App\Models\Submenu2Model;
 use App\Models\Submenu3Model;
-use App\Models\Submenu4Model;
 use App\Models\Submenu5Model;
-use App\Models\Submenu6Model;   
-use App\Models\CategoryModel;
-use App\Models\RulesModel;
-use App\Models\User;
 use App\Models\GalleryModel;
+use App\Models\GalleryDetailModel;
 use App\Models\AlumniModel;
 
 use DB;
@@ -224,22 +219,22 @@ class AdminController extends Controller
                 }
                 $new_img = $getnews->sm3_img;
             }
-            
+
 
             $news    = Submenu3Model::where('id_sub_menu_3', $id)
                             ->update([
-                                'sub_menu_id'   => 3,   
-                                'category_id'   => $request->category_id,   
-                                'author_id'     => $request->author_id,   
-                                'sm3_title'     => strtoupper($request->sm3_title),   
-                                'sm3_text'      => $request->text,   
-                                'sm3_img'       => $new_img,   
-                                'sm3_time'      => $request->sm3_time,   
-                                'sm3_date'      => $request->sm3_date,   
+                                'sub_menu_id'   => 3,
+                                'category_id'   => $request->category_id,
+                                'author_id'     => $request->author_id,
+                                'sm3_title'     => strtoupper($request->sm3_title),
+                                'sm3_text'      => $request->text,
+                                'sm3_img'       => $new_img,
+                                'sm3_time'      => $request->sm3_time,
+                                'sm3_date'      => $request->sm3_date,
                                 'sm3_isdelete'  => 'false'
                             ]);
 
-            
+
             return redirect('admin-user/berita/detail/'. $id)->with('success','Berhasil Mengubah Berita');
 
         }elseif ($aksi == 'hapus') {
@@ -364,7 +359,7 @@ class AdminController extends Controller
                     $alumni_img = $request->get('img_old');
                 }else{
                     $getimg = DB::table('tbl_alumni')->where('id_alumni', $id)->first();
-    
+
                     if ($request->hasfile('img_alumni')){
                         if($getimg->alumni_img != ''  && $getimg->alumni_img != null){
                             $file_old = public_path().'\images\alumni\\' . $getimg->alumni_img;
@@ -380,7 +375,7 @@ class AdminController extends Controller
                         $getimg->alumni_img='';
                     }
                     $alumni_img = $getimg->alumni_img;
-                } 
+                }
                 AlumniModel::where('id_alumni', $id)
                         ->update([
                             'alumni_name'               => $request->name,
@@ -399,14 +394,14 @@ class AdminController extends Controller
                             'alumni_major'              => $request->major,
                             'alumni_job'                => $request->job,
                             'alumni_img'                => $alumni_img,
-                            'is_approve'                => $request->is_approve       
+                            'is_approve'                => $request->is_approve
                         ]);
 
                 return redirect('admin-user/alumni/detail/'. $id)->with('success', 'Berhasil mengubah informasi alumni');
             }
 
         }
-    }  
+    }
 
     /*===============================================================
                             SEJARAH SEKOLAH
@@ -458,11 +453,11 @@ class AdminController extends Controller
             Submenu1Model::where('id_sub_menu_1', $id)
              ->update([
                 'sub_menu_id'   => 1,
-                'sm1_text'      => $request->text,   
+                'sm1_text'      => $request->text,
                 'sm1_img'       => $new_img
             ]);
 
-            
+
             return redirect('admin-user/sekolah/sejarah/sman2-padang')->with('success','Berhasil mengubah informasi sejarah SMAN 2 Padang');
 
         }elseif($aksi == 'ubah-profil-sman2-padang') {
@@ -492,11 +487,11 @@ class AdminController extends Controller
             Submenu2Model::where('id_sub_menu_2', $id)
              ->update([
                 'sub_menu_id'   => 1,
-                'sm2_text'      => $request->text,   
+                'sm2_text'      => $request->text,
                 'sm2_img'       => $new_img
             ]);
 
-            
+
             return redirect('admin-user/sekolah/profil/sman2-padang')->with('success','Berhasil mengubah informasi profil SMAN 2 Padang');
 
         }
@@ -570,7 +565,7 @@ class AdminController extends Controller
             Submenu5Model::where('id_sub_menu_5', $id)
              ->update([
                 'sub_menu_id'   => 1,
-                'sm5_text'      => $text,   
+                'sm5_text'      => $text,
                 'sm5_img'       => $new_img
             ]);
 
@@ -587,7 +582,9 @@ class AdminController extends Controller
         $menu   = MainmenuModel::with(['submenu'])->get();
         if ($aksi == 'daftar') {
             $category = DB::table('tbl_category')->where('menu_category','gallery')->get();
-            $galeri = DB::table('tbl_gallery')->get();
+            $galeri   = DB::table('tbl_gallery_detail')
+                        ->join('tbl_gallery','tbl_gallery.id_gallery','tbl_gallery_detail.gallery_id')
+                        ->get();
             return view('v_admin_user.menu_galeri', compact('menu','category','galeri'));
 
         }elseif($aksi == 'tambah') {
@@ -595,27 +592,33 @@ class AdminController extends Controller
             return view('v_admin_user.tambah_galeri', compact('menu','category'));
 
         }elseif($aksi == 'proses-tambah') {
+
             $gallery = new GalleryModel();
-            $gallery->category_id       = $request->input('category_id');
+            $gallery->id_gallery        = $request->id_gallery;
+            $gallery->category_id       = $request->category_id;
             $gallery->author_id         = Auth::user()->alumni_id;
-            $gallery->gallery_title     = strtolower($request->input('gallery_title'));
-            $gallery->gallery_text      = strtolower($request->input('gallery_text'));
+            $gallery->gallery_title     = strtolower($request->gallery_title);
+            $gallery->gallery_text      = strtolower($request->gallery_text);
             $gallery->gallery_time      = Carbon::now();
             $gallery->gallery_date      = Carbon::now();
             $gallery->gallery_isdelete  = "false";
+            $gallery->save();
 
-            if ($request->hasfile('gallery_img')) {
-                $file        = $request->file('gallery_img');
-                $extension   = $file->getClientOriginalExtension();
-                $gallery_img = time() . '.' . $extension;
-                $file->move('images/main/gallery/', $gallery_img);
-                $gallery->gallery_img = $gallery_img;
-            } else {
-                return $request;
-                $gallery->image = null;
+            $img = $request->gallery_img;
+            foreach($img as $i => $image)
+            {
+                $detail = new GalleryDetailModel();
+                $detail->gallery_id = $request->id_gallery;
+                if ($request->hasfile('gallery_img')) {
+                    $filename   = $image->getClientOriginalName();
+                    $image->move('images/main/gallery/', $filename);
+                    $detail->image = $filename;
+                } else {
+                    $detail->image = null;
+                }
+                $detail->save();
             }
 
-            $gallery->save();
             return redirect('admin-user/galeri/daftar/semua')->with('success','Berhasil Menambahkan Gambar Baru');
 
         }

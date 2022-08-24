@@ -71,8 +71,8 @@
             <div class="filter-container row">
               @foreach($galeri as $galeri)
               <div class="filtr-item col-sm-2" data-category="{{ $galeri->category_id }}" data-sort="white sample">
-                <a href="{{ asset('images/main/gallery/'. $galeri->gallery_img ) }}" data-toggle="lightbox" data-title="{{ $galeri->gallery_title }}">
-                  <img src="{{ asset('images/main/gallery/'. $galeri->gallery_img ) }}" class="img-fluid img-thumbnail mb-2" alt="white sample"/>
+                <a href="{{ asset('images/main/gallery/'. $galeri->image ) }}" data-toggle="lightbox" data-title="{{ $galeri->gallery_title }}">
+                  <img src="{{ asset('images/main/gallery/'. $galeri->image ) }}" class="img-fluid img-thumbnail mb-2" alt="white sample"/>
                 </a>
               </div>
               @endforeach

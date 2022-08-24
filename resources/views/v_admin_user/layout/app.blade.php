@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="{{ asset('dist-admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('dist-admin/plugins/summernote/summernote-bs4.min.css') }}">
+  @yield('css')
 </head>
 <body class="hold-transition light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">

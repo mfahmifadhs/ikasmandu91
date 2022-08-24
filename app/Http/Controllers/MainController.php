@@ -16,6 +16,7 @@ use App\Models\CategoryModel;
 use App\Models\RulesModel;
 use App\Models\User;
 use App\Models\GalleryModel;
+use App\Models\GalleryDetailModel;
 use App\Models\AlumniModel;
 
 use DB;
@@ -27,7 +28,6 @@ use Carbon\Carbon;
 
 class MainController extends Controller
 {
-
     public function index()
     {
         // =================== MENU =======================
@@ -167,12 +167,12 @@ class MainController extends Controller
 
         }elseif($aksi == 'cari') {
             if ($request->id_alumni == '') {
-                $alumni     = DB::table('tbl_alumni')->paginate(9);
+                $alumnis     = DB::table('tbl_alumni')->paginate(9);
             }else{
-                $alumni     = DB::table('tbl_alumni')->where('id_alumni', $request->id_alumni)->paginate(9);
+                $alumnis     = DB::table('tbl_alumni')->where('id_alumni', $request->id_alumni)->paginate(9);
             }
 
-            return view('v_main.daftar_alumni', compact('mainmenu','submenu','alumni'));
+            return view('v_main.daftar_alumni', compact('mainmenu','submenu','alumnis'));
 
         }elseif($aksi == 'tambah'){
             $rules  = DB::table('tbl_rules')->where('menu_id', 5)->get();
@@ -389,10 +389,7 @@ class MainController extends Controller
 
         if ($aksi == 'daftar') {
             $category = DB::table('tbl_category')->where('menu_category','gallery')->get();
-            $galeri   = DB::table('tbl_gallery')
-                            ->join('tbl_category','tbl_category.id_category','tbl_gallery.category_id')
-                            ->join('tbl_alumni','tbl_alumni.id_alumni','tbl_gallery.author_id')
-                            ->get();
+            $galeri   = GalleryModel::with('gallerydetail')->get();
             return view('v_main.menu_galeri', compact('mainmenu','submenu','category','galeri'));
 
         }
