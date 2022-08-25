@@ -31,7 +31,7 @@
                 <a type="button" onclick="oldPass()"><i class="fas fa-eye"></i></a>
               </span>
             </div>
-            <input type="password" id="old_pass" name="old_pass" class="form-control" placeholder="Minimal 8 karakter" min="8">
+            <input type="password" id="old_pass" name="old_pass" class="form-control" placeholder="Minimal 8 karakter" minlength="8">
           </div>
         </div>
         <div class="col-md-3">
@@ -46,7 +46,7 @@
                 <a type="button" onclick="newPass()"><i class="fas fa-eye"></i></a>
               </span>
             </div>
-            <input type="password" id="new_pass" name="new_pass" class="form-control" placeholder="Minimal 8 karakter" min="8">
+            <input type="password" id="new_pass" name="new_pass" class="form-control" placeholder="Minimal 8 karakter" minlength="8">
           </div>
         </div>
         <div class="col-md-3">

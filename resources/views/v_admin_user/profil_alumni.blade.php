@@ -31,7 +31,7 @@
               @if($alumni->alumni_img == null)
               <img class="profile-user-img img-fluid img-circle" src="https://cdn-icons-png.flaticon.com/512/599/599305.png" alt="Profil">
               @else
-              <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/alumni/'.$alumni-> alumni_img) }}" alt="Profil" 
+              <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/alumni/'.$alumni-> alumni_img) }}" alt="Profil"
               style="width: 135px;height: 130px;">
               @endif
             </div>
@@ -165,7 +165,7 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Alamat</label>
                     <div class="col-sm-9">
-                      <textarea class="form-control" name="address" >{{ $alumni->alumni_address }}</textarea> 
+                      <textarea class="form-control" name="address" >{{ $alumni->alumni_address }}</textarea>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -177,13 +177,13 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Jurusan</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="major" value="{{ $alumni->alumni_major }}"> 
+                      <input type="text" class="form-control" name="major" value="{{ $alumni->alumni_major }}">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Pekerjaan</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="job" value="{{ $alumni->alumni_job }}"> 
+                      <input type="text" class="form-control" name="job" value="{{ $alumni->alumni_job }}">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -191,8 +191,8 @@
                     <div class="col-sm-9">
                       <div class="btn btn-default btn-file">
                         <i class="fas fa-paperclip"></i> Upload Foto
-                        <input type="hidden" class="form-control image" name="img_old" value="{{ $alumni->alumni_img }}"> 
-                        <input type="file" class="form-control image" name="img_alumni"> 
+                        <input type="hidden" class="form-control image" name="img_old" value="{{ $alumni->alumni_img }}">
+                        <input type="file" class="form-control image" name="img_alumni">
                         <img id="preview-image-before-upload" src="{{ asset('images/alumni/'. $alumni->alumni_img) }}" style="max-height: 80px;">
                       </div><br>
                       <span class="help-block" style="font-size: 12px;">Format foto jpg/jpeg/png dan max 4 MB</span>
@@ -220,12 +220,12 @@
   $('.image').change(function(){
     let reader = new FileReader();
 
-    reader.onload = (e) => { 
-      $('#preview-image-before-upload').attr('src', e.target.result); 
+    reader.onload = (e) => {
+      $('#preview-image-before-upload').attr('src', e.target.result);
     }
 
-    reader.readAsDataURL(this.files[0]); 
-    
+    reader.readAsDataURL(this.files[0]);
+
   });
 </script>
 @endsection

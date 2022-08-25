@@ -135,7 +135,7 @@ class MainController extends Controller
 
                 User::where('alumni_id', $id)
                 ->update([
-                    'username'  => $request->username
+                    'username'  => $username
                 ]);
 
                  return redirect('main/alumni/profil/'. $id)->with('success', 'Berhasil memperbarui informasi');
