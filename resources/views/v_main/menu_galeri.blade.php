@@ -59,12 +59,6 @@
             <div class="modal fade" id="gallery-{{ $gallery->id_gallery }}" style="margin-top:15vh;">
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">{{ $gallery->id_gallery }}</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
                   <div class="modal-body">
                     <div id="carouselExample{{ $gallery->id_gallery }}" class="carousel slide" data-ride="carousel">
                       <div class="carousel-inner">
@@ -74,24 +68,24 @@
                             </div>
                         @endforeach
                       </div>
-                        <a class="carousel-control-prev" href="#carouselExample{{ $gallery->id_gallery }}" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExample{{ $gallery->id_gallery }}" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                        </div>
+                      <a class="carousel-control-prev" href="#carouselExample{{ $gallery->id_gallery }}" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExample{{ $gallery->id_gallery }}" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                      </div>
                   </div>
                 </div>
               </div>
             </div>
-            <p class="pt-0 text-capitalize">
-              <i class="far fa-calendar ml-2"></i>
-                {{ \Carbon\Carbon::parse($gallery->gallery_date)->isoFormat('DD MMMM Y') }}  &ensp; | &ensp;
-              <i class="far fa-folder-open"></i> {{ $gallery->category_name }}
-            </p>
+            <div class="card-footer">
+              <p class="mt-3 text-capitalize text-center">
+                <a href="#" class="btn btn-primary">Lihat selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+              </p>
+            </div>
           </div>
         </div>
       @endforeach
