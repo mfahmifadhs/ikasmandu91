@@ -36,7 +36,7 @@
     <div class="row">
       @foreach($galeri as $gallery)
       <div class="col-lg-6 mt-5 mt-lg-0 form-group">
-          <div class="card">
+        <div class="card">
             <a type="button" class="btn btn-default" data-toggle="modal" data-target="#gallery-{{ $gallery->id_gallery }}">
               <div class="form-group">
                 <div class="gallery-img-container">
@@ -83,7 +83,7 @@
             </div>
             <div class="card-footer">
               <p class="mt-3 text-capitalize text-center">
-                <a href="#" class="btn btn-primary">Lihat selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ url('main/galeri/detail/'. $gallery->id_gallery) }}" class="btn btn-primary">Lihat selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
               </p>
             </div>
           </div>

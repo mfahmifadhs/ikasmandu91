@@ -12,7 +12,7 @@ class CommentModel extends Model
     protected $table        = "tbl_comments";
     protected $primary_key  = "id_comment";
     public $timestamps      = false;
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +22,7 @@ class CommentModel extends Model
     protected $fillable = [
         'id_comment',
         'news_id',
+        'gallery_id',
         'alumni_id',
         'comment',
         'comment_date'

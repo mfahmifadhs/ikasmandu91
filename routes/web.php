@@ -111,7 +111,7 @@ Route::group(['prefix' => 'main', 'as' => 'main.'], function () {
     Route::get('organisasi/{aksi}/{id}', [MainController::class, 'showOrganization']);
     Route::get('galeri/{aksi}/{id}', [MainController::class, 'showGallery']);
 
-
+    Route::post('galeri/{aksi}/{id}', [MainController::class, 'showGallery']);
     Route::post('alumni/{aksi}/{id}', [MainController::class, 'showAlumni']);
     Route::post('berita/{aksi}/{id}', [MainController::class, 'showNews']);
     Route::post('alumni/{aksi}/{id}', [MainController::class, 'showAlumni']);

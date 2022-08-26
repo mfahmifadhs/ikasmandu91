@@ -344,7 +344,7 @@ class MainController extends Controller
             $comment                = new CommentModel();
             $comment->news_id       = $request->input('id_news');
             $comment->alumni_id     = Auth::user()->alumni_id;
-            $comment->comment       = $request->input('comment');
+            $comment->comment       = strtolower($request->input('comment'));
             $comment->comment_date  = Carbon::now();
             $comment->save();
 
@@ -394,6 +394,29 @@ class MainController extends Controller
             $category = DB::table('tbl_category')->where('menu_category','gallery')->get();
             $galeri   = GalleryModel::with('gallerydetail')->get();
             return view('v_main.menu_galeri', compact('mainmenu','submenu','category','galeri'));
+
+        }elseif($aksi == 'detail'){
+            $galeri   = GalleryModel::with('gallerydetail')->where('id_gallery', $id)->get();
+            $recent   = GalleryModel::with('gallerydetail')
+                            ->orderby('id_gallery', 'DESC')
+                            ->limit(10)
+                            ->where('id_gallery','!=', $id)
+                            ->get();
+            $comments = DB::table('tbl_comments')
+                            ->join('tbl_alumni','tbl_alumni.id_alumni','tbl_comments.alumni_id')
+                            ->where('gallery_id', $id)
+                            ->get();
+            return view('v_main.detail_galeri', compact('mainmenu','submenu','galeri','recent','comments'));
+
+        }elseif($aksi == 'komentar') {
+            $comment                = new CommentModel();
+            $comment->gallery_id    = $request->input('gallery_id');
+            $comment->alumni_id     = Auth::user()->alumni_id;
+            $comment->comment       = strtolower($request->input('comment'));
+            $comment->comment_date  = Carbon::now();
+            $comment->save();
+
+            return redirect('main/galeri/detail/'. $request->gallery_id)->with('Berhasil menambahkan komentar');
 
         }
     }
