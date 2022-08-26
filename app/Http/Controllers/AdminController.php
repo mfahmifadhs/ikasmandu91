@@ -63,11 +63,11 @@ class AdminController extends Controller
 
         }elseif ($idsubmenu == 11) {
             // Data Alumni
-            return redirect('admin-user/galeri/daftar/semua')->with('success','Berhasil menambah data gambar baru!');
+            return redirect('admin-user/galeri/daftar/semua');
 
         }elseif ($idsubmenu == 12) {
             // Data Alumni
-            return redirect('admin-user/alumni/daftar/semua')->with('success','Berhasil menambah data alumni baru!');
+            return redirect('admin-user/alumni/daftar/semua');
 
         }else{
             return redirect('admin-user/dashboard');
@@ -582,10 +582,12 @@ class AdminController extends Controller
         $menu   = MainmenuModel::with(['submenu'])->get();
         if ($aksi == 'daftar') {
             $category = DB::table('tbl_category')->where('menu_category','gallery')->get();
-            $galeri   = DB::table('tbl_gallery_detail')
-                        ->join('tbl_gallery','tbl_gallery.id_gallery','tbl_gallery_detail.gallery_id')
-                        ->get();
+            $galeri   = GalleryModel::with('gallerydetail')->get();
             return view('v_admin_user.menu_galeri', compact('menu','category','galeri'));
+
+        }elseif($aksi == 'detail'){
+            $galeri   = GalleryModel::with('gallerydetail')->where('id_gallery', $id)->get();
+            return view('v_admin_user.detail_galeri', compact('menu','galeri'));
 
         }elseif($aksi == 'tambah') {
             $category = DB::table('tbl_category')->where('menu_category','gallery')->get();

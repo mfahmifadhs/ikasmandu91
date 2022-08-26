@@ -47,33 +47,57 @@
             </div>
           </div>
           <div class="card-body">
-            <div>
-              <div class="btn-group w-100 mb-2">
-                <a class="btn btn-info active" href="javascript:void(0)" data-filter="all"> All items </a>
-                @foreach($category as $category)
-                <a class="btn btn-info" href="javascript:void(0)" data-filter="{{ $category->id_category }}"> {{ $category->category_name }} </a>
-                @endforeach
+            <div class="row">
+              @foreach($galeri as $gallery)
+              <div class="col-md-4 form-group">
+                <a type="button" data-toggle="modal" data-target="#gallery-{{ $gallery->id_gallery }}">
+                  <div class="form-group">
+                    <div id="gal-{{ $gallery->id_gallery }}" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner">
+                        @foreach($gallery->gallerydetail as $key => $detail)
+                          <div class="carousel-item <?php if($key==0){echo "active";} ?>">
+                            <img class="d-block w-100 img-thumbnail" src="{{ asset('images/main/gallery/'. $detail->image)}}">
+                          </div>
+                        @endforeach
+                      </div>
+                      <a class="carousel-control-prev" href="#gal-{{ $gallery->id_gallery }}" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#gal-{{ $gallery->id_gallery }}" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+                  </div>
+                </a>
               </div>
-              <div class="mb-2">
-                <a class="btn btn-secondary" href="javascript:void(0)" data-shuffle> Acak Gambar </a>
-                <div class="float-right">
-                  <select class="custom-select" style="width: auto;" data-sortOrder>
-                    <option value="index"> Sort by Position </option>
-                    <option value="sortData"> Sort by Custom Data </option>
-                  </select>
-                  <div class="btn-group">
-                    <a class="btn btn-default" href="javascript:void(0)" data-sortAsc> Ascending </a>
-                    <a class="btn btn-default" href="javascript:void(0)" data-sortDesc> Descending </a>
+              <div class="modal fade" id="gallery-{{ $gallery->id_gallery }}" style="margin-top:15vh;">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <div id="carouselExample{{ $gallery->id_gallery }}" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                          <a href="{{ url('admin-user/galeri/detail/'. $gallery->id_gallery) }}">
+                          @foreach($gallery->gallerydetail as $key => $detail)
+                            <div class="carousel-item <?php if($key==0){echo "active";} ?>">
+                              <img class="d-block w-100" src="{{ asset('images/main/gallery/'. $detail->image)}}">
+                            </div>
+                          @endforeach
+                          </a>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExample{{ $gallery->id_gallery }}" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExample{{ $gallery->id_gallery }}" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="filter-container row">
-              @foreach($galeri as $galeri)
-              <div class="filtr-item col-sm-2" data-category="{{ $galeri->category_id }}" data-sort="white sample">
-                <a href="{{ asset('images/main/gallery/'. $galeri->image ) }}" data-toggle="lightbox" data-title="{{ $galeri->gallery_title }}">
-                  <img src="{{ asset('images/main/gallery/'. $galeri->image ) }}" class="img-fluid img-thumbnail mb-2" alt="white sample"/>
-                </a>
               </div>
               @endforeach
             </div>
