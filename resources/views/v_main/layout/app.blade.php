@@ -150,7 +150,7 @@
                             @foreach($submenu as $sm3)
                               @if($sm3->main_menu_id == 3)
                                 <li>
-                                  <a href="#">
+                                  <a href="{{ url('main/menu/'. $sm3->id_sub_menu) }}">
                                     {{$sm3->sub_menu_name}}
                                   </a>
                                 </li>

@@ -46,6 +46,49 @@ class MainController extends Controller
         }else{
             return view('v_main.index', compact('mainmenu','submenu','news','opening','response'));
         }
+    }
+
+    /*===============================================================
+                            MENU
+    ===============================================================*/
+
+    public function showMenu($id)
+    {
+        if($id == 1){
+            return redirect('main/sekolah/sejarah/sman2-padang');
+
+        }elseif($id == 2){
+            return redirect('main/sekolah/profil/sman2-padang');
+
+        }elseif($id == 3){
+            return redirect('main/berita/daftar/semua');
+
+        }elseif($id == 4){
+            return redirect('/#kata-sambutan');
+
+        }elseif($id == 5){
+            // Struktur Organisasi
+            return redirect('main/organisasi/kepengurusan/ikasmandu91');
+
+        }elseif($id == 6){
+            // Pengurus
+            return redirect('main/organisasi/kepengurusan/ikasmandu91#pengurus');
+
+        }elseif ($id == 11) {
+            // Data Alumni
+            return redirect('main/galeri/daftar/semua')->with('success','Berhasil menambah data gambar baru!');
+
+        }elseif ($id == 12) {
+            // Data Alumni
+            return redirect('main/alumni/daftar/semua')->with('success','Berhasil menambah data alumni baru!');
+
+        }else{
+            // =================== MENU =======================
+                $mainmenu  = DB::table('tbl_main_menu')->get();
+                $submenu   = DB::table('tbl_sub_menu')->get();
+            // ================================================
+            return view('file_not_found', compact('mainmenu','submenu'));
+        }
 
     }
 
@@ -218,46 +261,6 @@ class MainController extends Controller
             }
 
         }
-    }
-
-    /*===============================================================
-                            MENU
-    ===============================================================*/
-
-    public function showMenu($id)
-    {
-        if($id == 1){
-            return redirect('main/sekolah/sejarah/sman2-padang');
-
-        }elseif($id == 2){
-            return redirect('main/sekolah/profil/sman2-padang');
-
-        }elseif($id == 3){
-            return redirect('main/berita/daftar/semua');
-
-        }elseif($id == 4){
-            return redirect('/#kata-sambutan');
-
-        }elseif($id == 5){
-            // Struktur Organisasi
-            return redirect('main/organisasi/kepengurusan/ikasmandu91');
-
-        }elseif($id == 6){
-            // Pengurus
-            return redirect('main/organisasi/kepengurusan/ikasmandu91#pengurus');
-
-        }elseif ($id == 11) {
-            // Data Alumni
-            return redirect('main/galeri/daftar/semua')->with('success','Berhasil menambah data gambar baru!');
-
-        }elseif ($id == 12) {
-            // Data Alumni
-            return redirect('main/alumni/daftar/semua')->with('success','Berhasil menambah data alumni baru!');
-
-        }else{
-            return redirect('main/dashboard');
-        }
-
     }
 
 
